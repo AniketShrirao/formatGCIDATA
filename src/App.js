@@ -1,23 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import { getRegionWiseData, readExcel } from './data/input';
 
 function App() {
+
+  const handleFile = async (e) => {
+    const data = await readExcel(e.target.previousElementSibling.files[0]);
+    const regionData = getRegionWiseData(data);
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <input
+        type="file"
+        id='excelInput'
+      />
+      <input type="button" value="submit" onClick={(e) => handleFile(e)} />
     </div>
   );
 }
